@@ -2,6 +2,7 @@ import random
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 class JobShop:
     def __init__(self, jobs):
@@ -129,15 +130,23 @@ jobs = [
 job_shop = JobShop(jobs)
 
 # Hill Climbing
+start_time = time.time()
 hill_climbing_solution, hill_climbing_value = job_shop.hill_climbing()
+end_time = time.time()
+hill_climbing_duration = end_time - start_time
 print("Hill Climbing Solution:", hill_climbing_solution)
 print("Hill Climbing Makespan:", hill_climbing_value)
+print("Hill Climbing Execution Time:", hill_climbing_duration, "seconds")
 job_shop.visualize_schedule(hill_climbing_solution, "Hill Climbing Schedule")
 
 # Simulated Annealing
 initial_temperature = 1000
 cooling_rate = 0.95
+start_time = time.time()
 sa_solution, sa_value = job_shop.simulated_annealing(initial_temperature, cooling_rate)
+end_time = time.time()
+sa_duration = end_time - start_time
 print("Simulated Annealing Solution:", sa_solution)
 print("Simulated Annealing Makespan:", sa_value)
+print("Simulated Annealing Execution Time:", sa_duration, "seconds")
 job_shop.visualize_schedule(sa_solution, "Simulated Annealing Schedule")
