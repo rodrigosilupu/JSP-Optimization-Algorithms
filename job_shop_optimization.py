@@ -102,7 +102,7 @@ class JobShop:
                     edgecolor='black'
                 )
                 gnt.text(start_time + time / 2, 10 * machine + 4.5, f'{job_index}', 
-                         ha='center', va='center', color='white', fontsize=12)
+                        ha='center', va='center', color='white', fontsize=12)
                 machine_start_times[machine] = start_time + time
                 job_start_time = start_time + time
 
@@ -113,7 +113,7 @@ class JobShop:
         plt.show()
 
 
-# Ejemplo más complejo de uso
+##############  caso 1 
 jobs = [
     [(0, 3), (1, 2), (2, 2), (3, 1)],
     [(0, 2), (2, 1), (1, 4), (3, 3)],
@@ -134,9 +134,9 @@ start_time = time.time()
 hill_climbing_solution, hill_climbing_value = job_shop.hill_climbing()
 end_time = time.time()
 hill_climbing_duration = end_time - start_time
-print("Hill Climbing Solution:", hill_climbing_solution)
+print("Solución Hill Climbing :", hill_climbing_solution)
 print("Hill Climbing Makespan:", hill_climbing_value)
-print("Hill Climbing Execution Time:", hill_climbing_duration, "seconds")
+print("Hill Climbing Tiempo de Ejecución:", hill_climbing_duration, "segundos")
 job_shop.visualize_schedule(hill_climbing_solution, "Hill Climbing Schedule")
 
 # Simulated Annealing
@@ -146,7 +146,62 @@ start_time = time.time()
 sa_solution, sa_value = job_shop.simulated_annealing(initial_temperature, cooling_rate)
 end_time = time.time()
 sa_duration = end_time - start_time
-print("Simulated Annealing Solution:", sa_solution)
+print("Solución Simulated Annealing:", sa_solution)
 print("Simulated Annealing Makespan:", sa_value)
-print("Simulated Annealing Execution Time:", sa_duration, "seconds")
+print("Simulated Annealing Tiempo de Ejecución:", sa_duration, "segundos")
 job_shop.visualize_schedule(sa_solution, "Simulated Annealing Schedule")
+
+##############  caso 2 
+# Generación de la matriz de trabajos 60 x 60
+num_jobs = 60
+num_machines = 60
+jobs = [
+    [(machine, random.randint(1, 10)) for machine in range(num_machines)]
+    for _ in range(num_jobs)
+]
+job_shop = JobShop(jobs)
+#Hill Climbing
+start_time = time.time()
+hc_solution, hc_makespan = job_shop.hill_climbing()
+hc_duration = time.time() - start_time
+print(f"Hill Climbing Solution: {hc_solution[:5]}...")  
+print(f"Hill Climbing Makespan: {hc_makespan}")
+print(f"Hill Climbing Duration: {hc_duration} seconds")
+
+#Simulated Annealing
+initial_temperature = 1000
+cooling_rate = 0.95
+start_time = time.time()
+sa_solution, sa_makespan = job_shop.simulated_annealing(initial_temperature, cooling_rate)
+sa_duration = time.time() - start_time
+print(f"Simulated Annealing Solution: {sa_solution[:5]}...")  # Mostrar solo los primeros 5 trabajos para brevedad
+print(f"Simulated Annealing Makespan: {sa_makespan}")
+print(f"Simulated Annealing Duration: {sa_duration} seconds")
+
+
+##############  caso 3 
+# Generación de la matriz de trabajos 100 x 100
+num_jobs = 100
+num_machines = 100
+jobs = [
+    [(machine, random.randint(1, 10)) for machine in range(num_machines)]
+    for _ in range(num_jobs)
+]
+job_shop = JobShop(jobs)
+#Hill Climbing
+start_time = time.time()
+hc_solution, hc_makespan = job_shop.hill_climbing()
+hc_duration = time.time() - start_time
+print(f"Hill Climbing Solution: {hc_solution[:5]}...")  
+print(f"Hill Climbing Makespan: {hc_makespan}")
+print(f"Hill Climbing Duration: {hc_duration} seconds")
+
+#Simulated Annealing
+initial_temperature = 1000
+cooling_rate = 0.95
+start_time = time.time()
+sa_solution, sa_makespan = job_shop.simulated_annealing(initial_temperature, cooling_rate)
+sa_duration = time.time() - start_time
+print(f"Simulated Annealing Solution: {sa_solution[:5]}...")  # Mostrar solo los primeros 5 trabajos para brevedad
+print(f"Simulated Annealing Makespan: {sa_makespan}")
+print(f"Simulated Annealing Duration: {sa_duration} seconds")
