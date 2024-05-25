@@ -189,7 +189,7 @@ La probabilidad de aceptación sería:
         \end{itemize}
     \end{enumerate}
 
-\section{Especificación del Problema}
+\section{Caso 1}
 En este apartado se presenta un caso en específico. Se plantea la tarea de organizar y secuenciar 10 trabajos distintos, cada uno compuesto por una serie de operaciones que deben ser realizadas en 4 máquinas diferentes. Cada trabajo debe pasar por todas las máquinas, y cada máquina realiza una operación específica en un tiempo determinado. Las operaciones están detalladas en una matriz donde cada elemento indica en qué máquina se realizará la operación y cuánto tiempo tomará. 
 
 \begin{table}[H]
@@ -214,11 +214,10 @@ En este apartado se presenta un caso en específico. Se plantea la tarea de orga
 \label{tabla:matriz-trabajos}
 \end{table}
 
-
 Por ejemplo, el primer trabajo tiene cuatro operaciones que se realizan en las siguientes máquinas y tiempos:
 
 \begin{multicols}{2}
-    
+
 \begin{itemize}
  \item Máquina 0: 3 unidades de tiempo
  \item Máquina 1: 2 unidades de tiempo
@@ -228,29 +227,28 @@ Por ejemplo, el primer trabajo tiene cuatro operaciones que se realizan en las s
 
 \end{multicols} 
 
-El objetivo principal de este problema es minimizar el tiempo total necesario para completar todos los trabajos, conocido como makespan. Esto implica encontrar una secuencia óptima en la que los trabajos deben ser procesados en las diferentes máquinas para que el último trabajo se complete en el menor tiempo posible. Para lograr esto, se debe considerar las restricciones de orden de las operaciones dentro de cada trabajo, así como los conflictos que surgen cuando varios trabajos requieren la misma máquina al mismo tiempo. La meta es desarrollar un cronograma eficiente que minimice los tiempos de espera y maximice la utilización de las máquinas, reduciendo así el makespan. Tal y como se mencionó en el apartado anterior, para abordar este problema se aplicarán las técnicas Hill Climbing y Simulated Annealing. 
-
-\section{Resultados}
-
-En este apartado se presentan y analizan los resultados obtenidos al ejecutar los algoritmos de programación implementados para resolver el problema de Job Shop Scheduling. Los métodos empleados incluyen Hill Climbing y Recocido Simulado, cuyas soluciones se evaluarán en términos de makespan y se visualizarán mediante gráficos de Gantt para una mejor interpretación de la asignación de tareas a las máquinas.
+\noindent  El objetivo principal de este problema es minimizar el tiempo total necesario para completar todos los trabajos, conocido como makespan. Esto implica encontrar una secuencia óptima en la que los trabajos deben ser procesados en las diferentes máquinas para que el último trabajo se complete en el menor tiempo posible. Para lograr esto, se debe considerar las restricciones de orden de las operaciones dentro de cada trabajo, así como los conflictos que surgen cuando varios trabajos requieren la misma máquina al mismo tiempo. La meta es desarrollar un cronograma eficiente que minimice los tiempos de espera y maximice la utilización de las máquinas, reduciendo así el makespan. Tal y como se mencionó en el apartado anterior, para abordar este problema se aplicarán las técnicas Hill Climbing y Simulated Annealing. 
 
 \subsection{Hill Climbing}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{graphs/Hill Climbing sol.png}
+  \caption{Caso 1, Corrida del código usando Hill Climbing}
   \label{fig:miImagen}
 \end{figure}
 
-\noindent  La solución obtenida utilizando el algoritmo de Hill Climbing presenta una secuencia de trabajos organizada en función del tiempo total requerido por cada uno, comenzando con el trabajo 7 y terminando con el trabajo 0. El makespan obtenido es de 90 unidades de tiempo, lo que indica el tiempo total necesario para completar todos los trabajos en la secuencia determinada.
+\noindent La solución obtenida mediante el algoritmo de Hill Climbing presenta una secuencia específica de trabajos. Esta secuencia comienza con el trabajo 7 y concluye con el trabajo 0, logrando un makespan de 90 unidades de tiempo. En términos de tiempo de ejecución, el algoritmo de Hill Climbing se ejecutó en 0.03 segundos, aproximadamente.
 
 \vspace{1em} % Esto añade un espacio vertical de 1em entre los párrafos
-\noindent  La Figura 1 presenta el gráfico de Gantt. Se observa que cada trabajo está representado por un bloque de color único en el gráfico, mostrando sus operaciones secuenciales en diferentes máquinas. La secuencia de trabajos en el gráfico sigue el orden determinado por el algoritmo de Hill Climbing, empezando con el trabajo 7 y terminando con el trabajo 0. Esto indica que el trabajo 7 tiene la mayor prioridad, seguido por el trabajo 1, y así sucesivamente. En relación a la utilización de cada máquina, se observa que las máquinas están ocupadas durante casi todo el tiempo, con mínimos periodos de inactividad, lo que indica una alta eficiencia en la programación de tareas. Sin embargo, a pesar de la alta utilización de las máquinas, la solución presenta un makespan relativamente alto de 90 unidades de tiempo, lo que sugiere que la secuencia de trabajos podría no ser óptima. Los tiempos de espera entre operaciones dentro de un mismo trabajo pueden estar contribuyendo significativamente a este makespan elevado. Además, el algoritmo Hill Climbing puede quedar atrapado en óptimos locales, limitando su capacidad para encontrar la solución más eficiente. Por lo tanto, aunque la solución muestra una distribución eficiente de las operaciones, existen oportunidades para mejorar el makespan explorando secuencias alternativas o utilizando algoritmos más sofisticados que puedan superar las limitaciones del Hill Climbing.
+\noindent La Figura 2 presenta un diagrama de Gantt que ilustra el algoritmo de Hill Climbing. En este diagrama, cada trabajo está representado por un bloque de color distinto, mostrando sus operaciones secuenciales en diversas máquinas. El orden de los trabajos en el gráfico sigue la secuencia determinada por el algoritmo de Hill Climbing, comenzando con el trabajo 7 y terminando con el trabajo 0. Esta representación visual muestra cómo se distribuyen las operaciones a lo largo del tiempo, resultando en un makespan de 90 unidades de tiempo.
+
+\noindent La utilización de cada máquina es variada, con algunos periodos de inactividad presentes. A pesar de esto, la estrategia de Hill Climbing busca optimizar el makespan mediante mejoras locales y deterministas. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{graphs/Hill Climbing graph.png}
-\caption{Gráfico de Gantt para la Solución Obtenida con Hill Climbing}
+\caption{Caso 1, Gráfico de Gantt para la Solución Obtenida con Hill Climbing}
 \label{fig:miImagen}
 \end{figure}
 
@@ -259,46 +257,106 @@ En este apartado se presentan y analizan los resultados obtenidos al ejecutar lo
 \begin{figure}[H]
   \centering
   \includegraphics[width=\linewidth]{graphs/Simulated Annealing sol.png}
+\caption{Caso 1, Corrida del código usando Simulated Annealing}
   \label{fig:miImagen}
 \end{figure}
 
-\noindent La solución obtenida utilizando el algoritmo de Simulated Annealing presenta una secuencia de trabajos diferente, organizada de manera que se exploran más combinaciones posibles debido a la naturaleza estocástica del algoritmo. Esta solución comienza con el trabajo 3 y termina con el trabajo 1. El makespan obtenido es de 87 unidades de tiempo, lo que indica una mejora respecto a la solución obtenida con Hill Climbing.
+\noindent La solución obtenida mediante el algoritmo de Simulated Annealing presenta una secuencia específica de trabajos. Esta secuencia comienza con el trabajo 5 y concluye con el trabajo 0, logrando un makespan de 88 unidades de tiempo. En términos de tiempo de ejecución, el algoritmo de Simulated Annealing se ejecutó en aproximadamente 0.0197 segundos.
 
 \vspace{1em} % Esto añade un espacio vertical de 1em entre los párrafos
-\noindent La Figura 2 presenta el gráfico de Gantt correspondiente. En este gráfico, cada trabajo está representado por un bloque de color único, mostrando sus operaciones secuenciales en diferentes máquinas. La secuencia de trabajos en el gráfico sigue el orden determinado por el algoritmo de Simulated Annealing, comenzando con el trabajo 3 y terminando con el trabajo 1. Esta secuencia permite una mejor distribución de las operaciones, lo que se refleja en el menor makespan. La utilización de cada máquina es alta, con periodos de inactividad mínimos, similar a lo observado con Hill Climbing. Sin embargo, el algoritmo de Simulated Annealing permite aceptar temporalmente soluciones subóptimas para escapar de óptimos locales, lo que resulta en una mejor exploración del espacio de soluciones. Esto se traduce en una distribución más equilibrada de las tareas y una reducción en los tiempos de espera entre operaciones de un mismo trabajo. 
+\noindent La Figura 4 presenta un diagrama de Gantt que ilustra el algoritmo de Simulated Annealing. En este diagrama, cada trabajo está representado por un bloque de color distinto, mostrando sus operaciones secuenciales en diversas máquinas. El orden de los trabajos en el gráfico sigue la secuencia determinada por el algoritmo de Simulated Annealing, comenzando con el trabajo 5 y terminando con el trabajo 0. Esta representación visual muestra cómo se distribuyen las operaciones a lo largo del tiempo, resultando en un makespan de 88 unidades de tiempo.
+
+\noindent La utilización de cada máquina es variada, con algunos periodos de inactividad presentes. A pesar de esto, la estrategia de Simulated Annealing permite aceptar temporalmente soluciones subóptimas para escapar de óptimos locales, lo que resulta en una mejor exploración del espacio de soluciones y una distribución más equilibrada de las tareas. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{graphs/Simulated Annealing graph.png}
-\caption{Gráfico de Gantt para la Solución Obtenida con Simulated Annealing}
+\caption{Caso 1, Gráfico de Gantt para la Solución Obtenida con Simulated Annealing}
 \label{fig:miImagen}
 \end{figure}
 
-En este sentido, se observa que, aunque ambas soluciones muestran una alta eficiencia en la utilización de máquinas, la solución de Recocido Simulado es superior al lograr un makespan menor. Este resultado destaca la ventaja del Recocido Simulado en encontrar soluciones más cercanas al óptimo global al equilibrar la exploración y la explotación del espacio de soluciones.
+\subsection{Comparación de los Modelos} 
+\begin{itemize}
+\item El algoritmo de Hill Climbing obtiene un makespan de 90 unidades de tiempo, mientras que el Simulated Annealing logra un makespan de 88 unidades de tiempo. Esto indica que, en este caso específico, Simulated Annealing encuentra una solución ligeramente más eficiente en términos de makespan.
+\item Hill Climbing se ejecuta en aproximadamente 0.03 segundos, destacándose por su rapidez debido a su naturaleza determinista; sin embargo, el modelo Simulated Annealing se ejecuta en aproximadamente 0.01 segundos, siendo también rápido, pero ligeramente más eficiente en términos de tiempo de ejecución en este caso particular.
+\end{itemize}
+
+
+\section{Caso 2}
+Para el segundo caso, se generará una matriz aleatoria de 60x60, en donde se plantean 60 trabajos distintos y 60 máquinas diferentes. Al igual que el Caso 1, se busca minimizar el makespan.   
+
+\subsection{Hill Climbing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{graphs/Hill Climbing sol c2.png}
+  \caption{Caso 2, Corrida del código usando Hill Climbing}
+  \label{fig:miImagen}
+\end{figure}
+
+\noindent Como se observa en la Figura 5, el makespan usando el modelo Hill Climbing es de 1080, con un tiempo de ejecución de 41.8 segundos, aproximadamente.
+
+\subsection{Simulated Annealing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{graphs/Simulated Annealing sol c2.png}
+  \caption{Caso 2, Corrida del código usando Simulated Annealing}
+  \label{fig:miImagen}
+\end{figure}
+
+\noindent Como se observa en la Figura 6, el makespan usando el modelo Simulated Annealing es de 964, con un tiempo de ejecución de 0.29 segundos, aproximadamente.
+
+\subsection{Comparación de los Modelos} 
+\begin{itemize}
+\item El modelo de Simulated Annealing logró un makespan de 964, que es considerablemente menor que el makespan de 1080 obtenido con Hill Climbing. Esto indica que Simulated Annealing encontró una secuencia de trabajos más eficiente, reduciendo el tiempo total necesario para completar todos los trabajos.
+\item En términos de tiempo de ejecución, Simulated Annealing fue más rápido, con un tiempo de ejecución de aproximadamente 0.29 segundos, en comparación con los 41.8 segundos de Hill Climbing.
+\end{itemize}
+
+\section{Caso 3}
+Para el tercer caso, se generará una matriz aleatoria de 100x100, en donde se plantean 100 trabajos distintos y 100 máquinas diferentes. Al igual que el Caso 1 y 2, se busca minimizar el makespan. 
+
+\subsection{Hill Climbing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{graphs/Hill Climbing sol c3.png}
+  \caption{Caso 3, Corrida del código usando Hill Climbing}
+  \label{fig:miImagen}
+\end{figure}
+
+\noindent Como se observa en la Figura 7, el makespan usando el modelo Hill Climbing es de 1868 unidades de tiempo, con un tiempo de ejecución de 639.24 segundos, aproximadamente.
+
+\subsection{Simulated Annealing}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{graphs/Simulated Annealing sol c3.png}
+  \caption{Caso 3, Corrida del código usando Simulated Annealing}
+  \label{fig:miImagen}
+\end{figure}
+
+\noindent Como se observa en la Figura 8, el makespan usando el modelo Simulated Annealing es de 1613, con un tiempo de ejecución de 1.29 segundos, aproximadamente.
+
+\subsection{Comparación de los Modelos} 
+\begin{itemize}
+\item El modelo de Simulated Annealing logró un makespan de 1613, que es considerablemente menor que el makespan de 1868 obtenido con Hill Climbing. Esto indica que Simulated Annealing encontró una secuencia de trabajos más eficiente, reduciendo el tiempo total necesario para completar todos los trabajos.
+\item En términos de tiempo de ejecución, Simulated Annealing fue extremadamente más rápido, con un tiempo de ejecución de aproximadamente 1.29 segundos, en comparación con los 639.24 segundos de Hill Climbing.
+\end{itemize}
 
 \section{Conclusiones}
 
-En este estudio se abordó el problema de programación de talleres flexibles (JSP) utilizando dos algoritmos de optimización: Hill Climbing y Simulated Annealing. A través de la implementación y análisis de ambos métodos, se obtuvieron soluciones para la secuenciación y asignación de trabajos en múltiples máquinas, con el objetivo de minimizar el tiempo total necesario para completar todos los trabajos, conocido como makespan.
-
-\vspace{1em}
-\noindent Los resultados mostraron que:
+En este estudio se evaluaron dos algoritmos de optimización, Hill Climbing y Simulated Annealing, aplicados a problemas de Job Shop Scheduling con diferentes escalas de trabajo. A través de la implementación y análisis de estos algoritmos en tres casos específicos, se lograron las siguientes conclusiones:
 
 \begin{itemize}
-    \item El algoritmo Hill Climbing, aunque eficiente en la asignación de tareas a las máquinas, tiende a quedar atrapado en óptimos locales, lo que limita su capacidad para encontrar la solución más eficiente. La solución obtenida con este método presentó un makespan de 90 unidades de tiempo.
-    \item El algoritmo de Simulated Annealing, por su parte, demostró una mayor capacidad para explorar el espacio de soluciones al aceptar temporalmente soluciones subóptimas. Esto permitió escapar de los óptimos locales y encontrar una mejor secuencia de operaciones, resultando en un makespan de 87 unidades de tiempo, que es inferior al obtenido con Hill Climbing.
+\item \textbf{Desempeño de Simulated Annealing vs Hill Climbing:} En los tres casos, Simulated Annealing demostró ser superior a Hill Climbing en términos de makespan y tiempo de ejecución. 
+
+\item \textbf{Eficiencia Computacional:} Simulated Annealing no solo logró un menor makespan en todos los casos, sino que también fue más eficiente en términos de tiempo de ejecución. En el Caso 1, el tiempo de ejecución fue de 0.0197 segundos frente a 0.03 segundos de Hill Climbing. En el Caso 2, Simulated Annealing se ejecutó en 0.29 segundos, mientras que Hill Climbing tomó 41.8 segundos. Finalmente, en el Caso 3, Simulated Annealing tuvo un tiempo de ejecución de 1.29 segundos comparado con los 639.24 segundos de Hill Climbing. Esto resalta la eficiencia computacional de Simulated Annealing, especialmente en problemas de mayor escala.
+
+\item \textbf{Escalabilidad:} Los resultados del Caso 2 y Caso 3, que involucraron matrices de 60x60 y 100x100 respectivamente, evidencian que Simulated Annealing maneja mejor los problemas de gran escala, manteniendo un rendimiento óptimo tanto en makespan como en tiempo de ejecución. Hill Climbing, por otro lado, presentó mayores dificultades y tiempos de ejecución significativamente más altos a medida que aumentaba la escala del problema.
+
+\item \textbf{Aplicabilidad en Problemas Reales:} Dado que el objetivo principal en problemas de Job Shop Scheduling es minimizar el makespan, Simulated Annealing se presenta como una herramienta más robusta y confiable para abordar problemas similares en entornos industriales y de manufactura. La capacidad de obtener soluciones eficientes en tiempos de ejecución cortos es crucial en aplicaciones prácticas donde los recursos y el tiempo son limitados.
 \end{itemize}
-
-\noindent Ambos métodos mostraron una alta utilización de las máquinas con periodos mínimos de inactividad, lo que refleja una programación eficiente. Sin embargo, la solución de Simulated Annealing superó a la de Hill Climbing al lograr una mejor distribución de las operaciones y reducir los tiempos de espera entre ellas.
-
-\vspace{1em}
-\noindent En conclusión, aunque Hill Climbing es un método sencillo y rápido, el Simulated Annealing demostró ser más eficaz para este tipo de problemas, proporcionando soluciones de mayor calidad al explorar más combinaciones posibles. Para futuros trabajos, se sugiere explorar la combinación de ambos métodos o la aplicación de otros algoritmos de optimización, como los algoritmos genéticos o técnicas de inteligencia artificial, para mejorar aún más los resultados obtenidos y acercarse al óptimo global del problema.
-
 
 
 \bibliographystyle{apacite} 
 \bibliography{referencias.bib}
-
-
 
 
 \end{document}
